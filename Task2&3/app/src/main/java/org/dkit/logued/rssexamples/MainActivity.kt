@@ -69,11 +69,6 @@ class MainActivity : AppCompatActivity() {
         // create intent filter for BroadcastReceiver
         intentFilter = IntentFilter()
         intentFilter.addAction("WORK_COMPLETE_ACTION") //note the same action as broadcast by the Service
-
-        val btnStart: Button = findViewById(R.id.btn_start)
-        btnStart.setOnClickListener {
-
-        }
     }
 
     override fun onStart() {
