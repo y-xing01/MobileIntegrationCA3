@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RSSExamples</string>
+    <string name="Stop">Stop</string>
+    <string name="start">Start</string>
+</resources>
