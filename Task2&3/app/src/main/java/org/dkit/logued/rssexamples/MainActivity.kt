@@ -54,8 +54,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val toolbar = supportActionBar
-        toolbar?.setDisplayHomeAsUpEnabled(true)
-        toolbar?.title = "RSS results"
+        toolbar?.title = "RSS Feed"
 
         resultRssList = arrayListOf()
         val rssItemAdapter = RssItemAdapter(resultRssList)
