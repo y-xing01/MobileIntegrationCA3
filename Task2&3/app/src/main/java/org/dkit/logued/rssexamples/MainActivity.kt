@@ -6,16 +6,20 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Button
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 // Use an Explicit (named Service) Intent to create service
 private lateinit var serviceIntent: Intent
 private lateinit var intentFilter: IntentFilter    // for BroadcastReceiver
 
+private lateinit var swipeLayout: SwipeRefreshLayout
 private lateinit var recyclerView: RecyclerView
 private lateinit var resultRssList: ArrayList<RssItem>
 
@@ -63,11 +67,22 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = rssItemAdapter
 
+        swipeLayout = findViewById(R.id.swipe_layout)
+        swipeLayout.setOnRefreshListener {
+            getData()
+        }
+
+        getData()
+    }
+
+    private fun getData() {
         serviceIntent = Intent(baseContext, RetrieveFeedService::class.java)
 
         // create intent filter for BroadcastReceiver
         intentFilter = IntentFilter()
         intentFilter.addAction("WORK_COMPLETE_ACTION") //note the same action as broadcast by the Service
+
+        swipeLayout.isRefreshing = false
     }
 
     override fun onStart() {
