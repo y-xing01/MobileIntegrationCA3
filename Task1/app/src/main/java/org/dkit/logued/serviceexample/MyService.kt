@@ -33,14 +33,6 @@ class MyService : Service() {
 
     fun doWork()
     {
-//        try {
-//            Thread.sleep(5000)
-//        }catch (e: InterruptedException){}
-
-        // Running a task in a separate thread
-        // will prevent this Service from blocking the UI
-        // in the MainActivity
-        //
         val thread = object : Thread() {
             override fun run() {
                 Log.i("Service", "MyService ... in doWork() - Thread Started")
@@ -50,11 +42,11 @@ class MyService : Service() {
                     // this will simulate a long-running task
                     // e.g. download form internet, write to database etc.
                     sleep(5000)
-                    val random1 = (0..100).shuffled().last()
+                    val random = (0..100).shuffled().last()
                     var flag = false
-                    for (i in 2..random1 / 2) {
+                    for (i in 2..random / 2) {
                         // condition for nonprime number
-                        if (random1 % i == 0) {
+                        if (random % i == 0) {
                             flag = true
                             break
                         }
